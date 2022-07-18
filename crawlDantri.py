@@ -38,7 +38,10 @@ for key in listCategories:
                 title = soup.find('h1', class_='title-page').get_text()
                 shotDescription = soup.find('h2', class_='singular-sapo').get_text()
                 body = soup.find('div', class_='singular-content')
+                htmlContent = str(body)
+                print(type(htmlContent))
                 content = ""
+                print(htmlContent)
                 try:
                     getAllTag_p = body.findChildren("p", recursive=False)
                     for tag_p in getAllTag_p:
@@ -48,7 +51,7 @@ for key in listCategories:
                 if(len(content) > 100 and len(content)<3000):
                     if count < limit:
                         count += 1
-                        insert_data(title, content, shotDescription, listCategories[key])
+                        insert_data(title, content, shotDescription, listCategories[key], htmlContent)
                     else:
                         break
             except:

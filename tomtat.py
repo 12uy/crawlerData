@@ -1,31 +1,21 @@
+import requests
 
-from selenium import webdriver
 
-text = """
-Một con mèo nhỏ bị ném từ một chiếc xe hơi trên đường vành đai Toulouse
+def tomtat(inputPayload):
+    payload = inputPayload
+    r = requests.post(
+        "https://smodin.io/smodin-service/summarize",
+        json={
+            "text": payload,
+            "sentenceBlocks": 1,
+            "language": "vi",
+            "type": "abstractive",
+            "internalSummarizer": "false"
+        },
+    )
+    return r.json()['summary']
 
-Hiệp hội bảo vệ động vật tìm thấy con mèo nhỏ bị thương. Điều này đang gióng lên hồi chuông cảnh báo về sự gia tăng việc bỏ rơi thú cưng trong mùa hè.
 
-Một cử chỉ khó hiểu và tàn nhẫn. Một con mèo ba tháng tuổi, được gọi là Nounette, đã bị cố tình ném từ một chiếc xe đang di chuyển vào cuối tháng 7 trên đường vành đai Toulouse, báo cáo của France Bleu. Đó là một hiệp hội bảo vệ động vật địa phương, Cha'Mania tiết lộ câu chuyện để cảnh báo số lượng động vật bị bỏ rơi ngày càng tăng trong mùa hè.
-
-Sự thật xảy ra trên đường vành đai Toulouse vào ngày 27 tháng 7. Sau khi đuổi con vật ra khi lái xe, tài xế quay xe lại và đi mất. Nounette (mèo) gần như đã chết. Cô bị một phương tiện khác đâm trúng và phát hiện bị thương nặng trong bụi rậm bởi một người. Người này sau đó đã đưa cô đến cơ sở của Cha'Mania để điều trị.
-
-«Mang đến một bác sĩ thú y, chúng tôi nhận thấy rằng bên trong cơ thể cô ấy, mọi thứ đều bị phá vỡ: chú mèo con có ba vết nứt ở xương chậu. Để có được trở lại trên đôi chân của mình, cô được kê đơn thuốc kháng sinh và được điều trị bằng lồng, » đài phát thanh nói.
-
-«Con vật không phải là một món đồ nội thất»
-
-Tức giận, các thành viên của hiệp hội muốn sử dụng sự kiện này để nâng cao nhận thức của công chúng về việc bỏ rơi và lạm dụng vật nuôi, một hiện tượng mà họ cảm thấy là quá phổ biến. «Thật đơn giản để gọi cho hiệp hội và nói rằng, bạn không muốn thú cưng của bạn vì một số lý do gì đó, nhưng từ đó ném nó ra ngoài cửa sổ trên đường, lái xe ... Rõ ràng là thiếu sự tôn trọng đối với động vật », Brigitte Maréchaux, một tình nguyện viên ở France Bleu đã phản ứng. Chính người phụ nữ này đã trông coi con mèo vào cho đến khi nó bình phục.
-
-«Chúng ta sẽ phải đưa ra một luật. Mỗi năm, chúng tôi tiếp nhận ngày càng nhiều động vật bị bỏ rơi, một tình nguyện viên nói với La Dépêche du Midi. Nó phải dừng lại. Một con vật không phải là một món đồ nội thất ». Hiệp hội đã đưa ra một lời kêu gọi các nhân chứng với hy vọng xác định người chịu trách nhiệm và nộp đơn kiện chống lại anh ta.
-"""
-browser = webdriver.Firefox()
-
-browser.post('https://resoomer.com/vi/')
-
-textField = browser.find_element_by_tag_name('textarea')
-print(textField)
-textField.send_keys(text)
-
-btnSubmit = browser.find_element_by_id("btnSendText_V2")
-
-btnSubmit.click()
+# payload = '''Theo đại diện Phòng Cảnh sát giao thông - Công an TP Hà Nội, lực lượng CSGT sẽ huy động 100% quân số làm nhiệm vụ, đảm bảo giao thông thông suốt, đặc biệt tại các tuyến đường quanh sân vận động Mỹ Đình.Sau trận đấu, lực lượng CSGT sẽ phối hợp với các đơn vị chức năng Công an Hà Nội đảm bảo trật tự an toàn giao thông, phòng, chống đua xe trái phép. Các tổ công tác 141 sẽ cắm chốt công khai trên địa bàn các quận nội thành và tuần tra hóa trang trên địa bàn quận Hoàn Kiếm, Đống Đa, Hai Bà Trưng để kiểm tra, kiểm soát, phòng, chống đua xe trái phép, đảm bảo an ninh trật tự.Bên cạnh đó, lực lượng CSGT sẽ phối hợp với Trung đoàn Cảnh sát cơ động, Cảnh sát 113 (Công an TP Hà Nội), công an các địa bàn chủ động tuần tra trên các tuyến đường.Theo phương án phân luồng của Công an Hà Nội, ngày 22/5, Công an Hà Nội hạn chế đối với các xe ô tô chở hàng có khối lượng hàng hóa chuyên chở từ 500 kg, xe ô tô chở khách từ 16 chỗ trở lên (trừ phương tiện của các lực lượng tham gia, xe có phù hiệu bảo vệ và xe giải quyết, khắc phục sự cố) lưu thông trên các tuyến đường: Lê Đức Thọ, Lê Quang Đạo, Mễ Trì, Châu Văn Liêm, Nguyễn Cơ Thạch, Đỗ Xuân Hợp, Trần Hữu Dực, Nguyễn Hoàng, Hàm Nghi, Tân Mỹ, Hồ Tùng Mậu, đường gom phải Đại lộ Thăng Long đoạn từ Trung tâm Hội nghị Quốc gia đến nút giao Lê Quang Đạo.Công an Hà Nội hướng dẫn, tổ chức phân luồng các phương tiện trong ngày diễn ra trận tranh giải Ba và trận Chung kết giữa U23 Việt Nam - U23 Thái Lan như sau:- Các phương tiện từ phía Tây sang phía Đông đến QL32 đi về trung tâm thành phố và ngược lại theo tuyến: Quốc lộ 32 - Đường 70 - Đại lộ Thăng Long (đường cao tốc hoặc đường gom trái) - Phạm Hùng - đi trung tâm thành phố.- Các phương tiện từ tỉnh Phú Thọ, Vĩnh Phúc và Hòa Bình đi trung tâm thành phố và ngược lại theo tuyến: Quốc lộ 32 - Quốc lộ 21 - Đại lộ Thăng Long - vào trung tâm thành phố.- Các phương tiện từ các tỉnh phía Nam, Đông Nam lưu thông trên tuyến Vành đai III trên cao - cầu Thăng Long - Võ Văn Kiệt - Quốc lộ 2 đi các tỉnh phía Bắc và Tây Bắc hạn chế xuống đường Hồ Tùng Mậu và đường gom phải Đại lộ Thăng Long.'''
+#
+# tomtat(payload)
