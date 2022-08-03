@@ -8,7 +8,7 @@ def textToSpeech(payload):
 
     payload = payload.replace("\n", " ")
 
-    api_key = 'L0L9gx92DEnoQZa7Bp0MrPYLpJ6ouxFy' # api key lấy từ fpt.ai
+    api_key = '39RpybYLtzJPrEhUr9Ytw9ZI2GkjY6q1' # api key lấy từ fpt.ai
 
     headers = {
         'api-key': api_key,

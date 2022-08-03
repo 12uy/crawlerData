@@ -25,7 +25,7 @@ def get_data():
     conn = connectDb()
 
     mycursor = conn.cursor()
-    mycursor.execute("SELECT id, content FROM news limit 80,40") # limit x, y lay y dong tu thu tu thu x
+    mycursor.execute("SELECT id, content FROM news limit 139,40") # limit x, y lay y dong tu thu tu thu x
     myresult = mycursor.fetchall()
     return myresult
     conn.close()
@@ -61,4 +61,13 @@ def updateTomTat(idnews, tomtat):
     conn.commit()
     print(mycursor.rowcount, "record(s) affected")
     print(tomtat)
+    conn.close()
+
+def get_all_link():
+    conn = connectDb()
+
+    mycursor = conn.cursor()
+    mycursor.execute("SELECT id, LinkTTS FROM news")
+    myresult = mycursor.fetchall()
+    return myresult
     conn.close()
