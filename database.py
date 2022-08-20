@@ -10,12 +10,12 @@ def connectDb():
     return conn
 
 
-def insert_data(title, content, shortdesc, categoryid, htmlPage):
+def insert_data(title, content, shortdesc, categoryid, htmlPage, tag_img):
     conn = connectDb()
 
     mycursor = conn.cursor()
-    sql = """INSERT INTO news (createdby , title , content, shortdescription, category_id, htmlPage ) VALUES (%s, %s, %s, %s, %s, %s)"""
-    value = ("admin", title, content, shortdesc, categoryid, htmlPage)
+    sql = """INSERT INTO news (createdby , title , content, shortdescription, category_id, htmlPage, tag_img ) VALUES (%s, %s, %s, %s, %s, %s, %s)"""
+    value = ("admin", title, content, shortdesc, categoryid, htmlPage, tag_img)
     mycursor.execute(sql,value)
     conn.commit()
     print(mycursor.rowcount, "record inserted.")
@@ -71,3 +71,4 @@ def get_all_link():
     myresult = mycursor.fetchall()
     return myresult
     conn.close()
+
